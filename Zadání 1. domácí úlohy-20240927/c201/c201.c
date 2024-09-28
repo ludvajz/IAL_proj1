@@ -37,6 +37,14 @@
 ** Svou implementaci vhodně komentujte!
 **/
 
+/**
+ * @file c201.c
+ * @author xludvir00
+ * @brief Implementace operací nad jednosměrným lineárním seznamem
+ * @date 2024-09-28
+ * 
+ */
+
 #include "c201.h"
 
 #include <stdio.h> // printf
@@ -104,9 +112,10 @@ void List_Dispose( List *list ) {
  */
 void List_InsertFirst( List *list, int data ) {
 	
-	ListElementPtr newElemPtr = (ListElementPtr) malloc(sizeof(ListElementPtr));
+	ListElementPtr newElemPtr = (ListElementPtr) malloc(sizeof(struct ListElement));
 	if (newElemPtr == NULL){
 		List_Error();
+		return;
 	}
 	newElemPtr->data = data;
 	newElemPtr->nextElement = list->firstElement;
@@ -134,6 +143,7 @@ void List_First( List *list ) {
 void List_GetFirst( List *list, int *dataPtr ) {
 	if (list->firstElement == NULL){
 		List_Error();
+		return;
 	}
 	*dataPtr = list->firstElement->data;
 }
@@ -150,9 +160,9 @@ void List_DeleteFirst( List *list ) {
 		if (list->activeElement == list->firstElement){
 			list->activeElement = NULL;
 		}
-    
+    ListElementPtr temp = list->firstElement;
     list->firstElement = list->firstElement->nextElement;
-    free(list->firstElement);
+    free(temp);
     list->currentLength--;	
 	}
 	
@@ -187,9 +197,10 @@ void List_DeleteAfter( List *list ) {
  */
 void List_InsertAfter( List *list, int data ) {
 	if (list->activeElement != NULL){
-		ListElementPtr newElemPtr = (ListElementPtr) malloc(sizeof(ListElementPtr));
+		ListElementPtr newElemPtr = (ListElementPtr) malloc(sizeof(struct ListElement));
 		if (newElemPtr == NULL){
 			List_Error();
+			return;
 		}
 		newElemPtr->data = data;
 		newElemPtr->nextElement = list->activeElement->nextElement;
@@ -209,6 +220,7 @@ void List_InsertAfter( List *list, int data ) {
 void List_GetValue( List *list, int *dataPtr ) {
 	if (list->activeElement == NULL){
 		List_Error();
+		return;
 	}
 	*dataPtr = list->activeElement->data;
 }
@@ -246,7 +258,7 @@ void List_Next( List *list ) {
  * @param list Ukazatel na inicializovanou strukturu jednosměrně vázaného seznamu
  */
 int List_IsActive( List *list ) {
-	return (list->activeElement != NULL) ? 1 : 0;;
+	return (list->activeElement != NULL) ? 1 : 0;
 }
 
 /* Konec c201.c */
