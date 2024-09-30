@@ -89,11 +89,11 @@ void List_Dispose( List *list ) {
     ListElementPtr next;
 
 	while (current != NULL) {
-        // Save the next element
+        // Ukazatel na další prvek
         next = current->nextElement;
-        // Free the current element
+        // Uvolnění paměti aktuálního prvku
         free(current);
-        // Move to the next element
+        // Posun na další prvek
         current = next;
     }
 
@@ -156,7 +156,8 @@ void List_GetFirst( List *list, int *dataPtr ) {
  * @param list Ukazatel na inicializovanou strukturu jednosměrně vázaného seznamu
  */
 void List_DeleteFirst( List *list ) {
-	if (list->firstElement != NULL){
+	if (list->firstElement != NULL){ // Pokud seznam není prázdný
+		// Pokud je rušený prvek aktivní, ztrácí se aktivita
 		if (list->activeElement == list->firstElement){
 			list->activeElement = NULL;
 		}
@@ -176,7 +177,8 @@ void List_DeleteFirst( List *list ) {
  * @param list Ukazatel na inicializovanou strukturu jednosměrně vázaného seznamu
  */
 void List_DeleteAfter( List *list ) {
-	if (list->activeElement != NULL){
+	if (list->activeElement != NULL){ // Pokud seznam není prázdný
+		// Pokud je rušený prvek aktivní, ztrácí se aktivita
 		if (list->activeElement->nextElement != NULL){
 			ListElementPtr elemPtr;
 			elemPtr = list->activeElement->nextElement;
@@ -196,7 +198,7 @@ void List_DeleteAfter( List *list ) {
  * @param data Hodnota k vložení do seznamu za právě aktivní prvek
  */
 void List_InsertAfter( List *list, int data ) {
-	if (list->activeElement != NULL){
+	if (list->activeElement != NULL){ // Pokud je seznam aktivní
 		ListElementPtr newElemPtr = (ListElementPtr) malloc(sizeof(struct ListElement));
 		if (newElemPtr == NULL){
 			List_Error();
