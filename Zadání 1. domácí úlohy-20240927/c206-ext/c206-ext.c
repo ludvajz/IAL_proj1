@@ -3,6 +3,7 @@
  *  Rozšíření pro příklad c206.c (Dvousměrně vázaný lineární seznam)
  *  Vytvořil: Daniel Dolejška, září 2024
  */
+
 /**
  * @file c206-ext.c
  * @author xludvir00
