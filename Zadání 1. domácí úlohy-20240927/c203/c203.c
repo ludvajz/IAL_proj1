@@ -48,6 +48,14 @@
 **
 **/
 
+/**
+ * @file c203.c
+ * @author xludvir00
+ * @brief Implementace fronty znaků v poli
+ * @date 2024-10-01
+ * 
+ */
+
 #include "c203.h"
 
 int QUEUE_SIZE = MAX_QUEUE;
